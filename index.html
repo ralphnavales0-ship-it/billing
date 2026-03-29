@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>San Alfonso Homes &mdash; HOA Billing System</title>
+<!-- Removed custom Google fonts to use normal system font -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="brand" onclick="showPage('home')">
+  <img src="image/logo.png" alt="San Alfonso Homes Logo" class="logo" />
+  <div class="brand-text">
+    <strong>San Alfonso Homes</strong>
+    <span>San Alfonso &bull; HOA</span>
+  </div>
+</div>
+  <div class="nav-links">
+    <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
+    <a onclick="showPage('billing')" id="nav-billing" style="display:none">Billing</a>
+    <a onclick="showPage('payment')" id="nav-payment">Payments</a>
+    <a onclick="showPage('announcements')" id="nav-announcements">Announcements</a>
+    <a onclick="showPage('contact')" id="nav-contact">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <div id="navLoggedOut"><button class="btn-login" onclick="openModal('loginModal')"><i class="fas fa-sign-in-alt"></i> Login</button></div>
+    <div id="navLoggedIn">
+      <span id="navName"></span>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()" style="color:#fff;background:rgba(255,255,255,.1);margin-left:.5rem"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+    <button class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- ============================================================ PAGE: HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-deco"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-shield-alt"></i> Official HOA Billing Portal</div>
+      <h1>San Alfonso Homes<br><span>Smart Living</span> Starts Here</h1>
+      <p>Manage your subdivision dues, track payments, and stay updated with community announcements &mdash; all in one secure platform.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="openModal('loginModal')"><i class="fas fa-user-circle"></i> Resident Login</button>
+        <button class="btn-outline" onclick="openModal('adminModal')"><i class="fas fa-user-shield"></i> Admin Access</button>
+      </div>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item"><div class="stat-num">248</div><div class="stat-label">Registered Units</div></div>
+      <div class="stat-item"><div class="stat-num">&#8369;1.2M</div><div class="stat-label">Collected This Year</div></div>
+      <div class="stat-item"><div class="stat-num">94%</div><div class="stat-label">Payment Compliance</div></div>
+      <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Online Access</div></div>
+    </div>
+  </div>
+  <div class="section" style="background:var(--cream)">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">What We Offer</div>
+        <h2>Everything You Need in One Place</h2>
+        <p>Our integrated billing system makes HOA dues management easy, transparent, and efficient for every resident.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div><h3>Online Billing</h3><p>View all your dues, billing history, and payment status in real-time from any device.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h3>Multiple Payment Options</h3><p>Pay via GCash, PayMaya, or bank transfer. Payments are recorded automatically.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-receipt"></i></div><h3>Digital Receipts</h3><p>Official digital receipts generated instantly. Download or print anytime.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-bell"></i></div><h3>Payment Reminders</h3><p>Receive automatic reminders before due dates so you never miss a payment.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h3>Financial Reports</h3><p>Admins get a complete financial dashboard with charts and monthly summaries.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-lock"></i></div><h3>Secure &amp; Private</h3><p>Protected with secure login, encrypted transactions, and role-based access.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="section ann-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Stay Updated</div>
+        <h2>Latest Announcements</h2>
+        <p>Important updates from the San Alfonso Homes Homeowners Association.</p>
+      </div>
+      <div class="ann-grid">
+        <div class="ann-card"><div class="ann-meta"><span class="ann-tag tag-notice">Notice</span><span class="ann-date">March 20, 2025</span></div><h4>March 2025 Dues Reminder</h4><p>Monthly dues of &#8369;1,500 are due on March 31, 2025. Penalties of &#8369;150 apply.</p></div>
+        <div class="ann-card"><div class="ann-meta"><span class="ann-tag tag-maint">Maintenance</span><span class="ann-date">March 18, 2025</span></div><h4>Water Interruption &mdash; Block C</h4><p>Scheduled maintenance March 22, 6AM&ndash;12PM. Prepare water reserves.</p></div>
+        <div class="ann-card"><div class="ann-meta"><span class="ann-tag tag-event">Event</span><span class="ann-date">March 15, 2025</span></div><h4>General Assembly &mdash; April 5</h4><p>All homeowners invited. Venue: Clubhouse. Time: 3:00 PM.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="fi">
+      <div class="ft">
+        <div class="fb"><strong>San Alfonso Homes</strong><p>Official billing and payment management portal of the San Alfonso Homes HOA.</p></div>
+        <div class="fc2"><h4>Quick Links</h4><a onclick="showPage('home')">Home</a><a onclick="showPage('billing')">Billing</a><a onclick="showPage('payment')">Payments</a><a onclick="showPage('announcements')">Announcements</a></div>
+        <div class="fc2"><h4>Contact</h4><a>&#128205; San Alfonso Homes, Laguna</a><a>&#128222; (049) 555-0123</a><a>&#9993; hoa@sanalfonsohomes.ph</a><a>&#128336; Mon&ndash;Fri, 8AM&ndash;5PM</a></div>
+      </div>
+      <div class="fbot"><span>&copy; 2025 San Alfonso Homes HOA. All rights reserved.</span><span>Billing System v1.0</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================ PAGE: RESIDENT DASHBOARD -->
+<div id="page-dashboard" class="page">
+  <div class="dash-layout">
+    <div class="sidebar" id="sidebar">
+      <div class="sb-user">
+        <div class="sb-avatar" id="resAvatar">JD</div>
+        <div class="sb-name" id="resName">Juan Dela Cruz</div>
+        <div class="sb-unit" id="resUnit">Block 3 &bull; Unit 12</div>
+      </div>
+      <nav class="sb-nav">
+        <a onclick="showDashTab('overview')" id="dt-overview" class="active"><i class="fas fa-th-large"></i> Overview</a>
+        <a onclick="showDashTab('mybills')" id="dt-mybills"><i class="fas fa-file-invoice-dollar"></i> My Bills</a>
+        <a onclick="showDashTab('history')" id="dt-history"><i class="fas fa-history"></i> Payment History</a>
+        <a onclick="showDashTab('notifs')" id="dt-notifs"><i class="fas fa-bell"></i> Notifications <span class="notif-badge">3</span></a>
+        <div class="sb-div"></div>
+        <a onclick="showPage('home')" class="sb-dim"><i class="fas fa-home"></i> Back to Home</a>
+        <a onclick="doLogout()" class="sb-dim"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </div>
+    <div class="dash-content">
+      <!-- TAB: Overview -->
+      <div id="dtc-overview" class="tab-c active">
+        <div class="dash-hdr"><h2 id="dashGreeting">Good day, Juan!</h2><p>Here&rsquo;s your account summary for March 2025.</p></div>
+        <div class="alert a-warn"><i class="fas fa-exclamation-triangle"></i> You have unpaid dues. Please settle before the due date to avoid penalties.</div>
+        <div class="sw-grid">
+          <div class="sw"><div class="sw-icon ic-o"><i class="fas fa-peso-sign"></i></div><div><div class="sw-val" id="swDue">&#8369;1,500</div><div class="sw-lbl">Current Due</div></div></div>
+          <div class="sw"><div class="sw-icon ic-g"><i class="fas fa-check-circle"></i></div><div><div class="sw-val" id="swPaid">&#8369;18,000</div><div class="sw-lbl">Total Paid 2024</div></div></div>
+          <div class="sw"><div class="sw-icon ic-r"><i class="fas fa-exclamation"></i></div><div><div class="sw-val" id="swUnpaid">1</div><div class="sw-lbl">Unpaid Bills</div></div></div>
+          <div class="sw"><div class="sw-icon ic-b"><i class="fas fa-receipt"></i></div><div><div class="sw-val">12</div><div class="sw-lbl">Receipts</div></div></div>
+        </div>
+        <div class="g2">
+          <div class="card">
+            <div class="card-hdr"><h3><i class="fas fa-file-invoice-dollar tgold mr6"></i>Recent Bills</h3><button class="btn btn-ghost btn-sm" onclick="showDashTab('mybills')">View All</button></div>
+            <div id="recentBillsTable"><table><thead><tr><th>Month</th><th>Amount</th><th>Status</th></tr></thead><tbody id="recentBillsBody"></tbody></table></div>
+          </div>
+          <div class="card">
+            <div class="card-hdr"><h3><i class="fas fa-bell tgold mr6"></i>Notifications</h3></div>
+            <div class="card-body">
+              <div class="notif"><div class="ndot w"></div><div><div class="n-text">March dues due on March 31, 2025.</div><div class="n-time">Today</div></div></div>
+              <div class="notif"><div class="ndot s"></div><div><div class="n-text">February payment confirmed. Receipt ready.</div><div class="n-time">Feb 15</div></div></div>
+              <div class="notif"><div class="ndot i"></div><div><div class="n-text">General Assembly scheduled for April 5.</div><div class="n-time">Mar 15</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- TAB: My Bills -->
+      <div id="dtc-mybills" class="tab-c">
+        <div class="dash-hdr page-top-row">
+          <div><h2 class="page-title">My Bills</h2><p class="tmut tsm" id="resInfo2">Block 3, Unit 12</p></div>
+          <div class="filters">
+            <div class="chip active" onclick="filterBills(this,'all')">All</div>
+            <div class="chip" onclick="filterBills(this,'unpaid')">Unpaid</div>
+            <div class="chip" onclick="filterBills(this,'paid')">Paid</div>
+            <div class="chip" onclick="filterBills(this,'overdue')">Overdue</div>
+          </div>
+        </div>
+        <div class="alert a-warn"><i class="fas fa-clock"></i> Please settle unpaid bills before the due date to avoid penalties.</div>
+        <div class="card"><div class="t-wrap"><table>
+          <thead><tr><th>Billing Period</th><th>Description</th><th>Amount Due</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="myBillsTable"></tbody>
+        </table></div></div>
+      </div>
+      <!-- TAB: History -->
+      <div id="dtc-history" class="tab-c">
+        <div class="dash-hdr"><h2>Payment History</h2><p>Complete record of all your payments.</p></div>
+        <div class="card">
+          <div class="card-hdr"><h3>All Transactions</h3><button class="btn btn-green btn-sm"><i class="fas fa-download"></i> Export</button></div>
+          <div class="t-wrap"><table>
+            <thead><tr><th>Receipt #</th><th>Period</th><th>Amount</th><th>Method</th><th>Date Paid</th><th>Status</th></tr></thead>
+            <tbody id="historyTable"></tbody>
+          </table></div>
+        </div>
+      </div>
+      <!-- TAB: Notifications -->
+      <div id="dtc-notifs" class="tab-c">
+        <div class="dash-hdr"><h2>Notifications</h2><p>Your recent alerts and reminders.</p></div>
+        <div class="card"><div class="card-body">
+          <div class="notif"><div class="ndot w"></div><div><div class="n-text bold">&#9888;&#65039; Dues due in 11 days (March 31). Amount: &#8369;1,500.</div><div class="n-time">March 20, 2025</div></div></div>
+          <div class="notif"><div class="ndot i"></div><div><div class="n-text">&#128226; General Assembly on April 5, 3PM at the Clubhouse.</div><div class="n-time">March 15, 2025</div></div></div>
+          <div class="notif"><div class="ndot w"></div><div><div class="n-text">&#128295; Water interruption on March 22 (Block C), 6AM&ndash;12PM.</div><div class="n-time">March 18, 2025</div></div></div>
+          <div class="notif"><div class="ndot s"></div><div><div class="n-text">&#9989; February 2025 payment of &#8369;1,500 received. Receipt ready.</div><div class="n-time">February 14, 2025</div></div></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ PAGE: PAYMENT -->
+<div id="page-payment" class="page">
+  <div class="section">
+    <div class="container" style="max-width:700px">
+      <div class="dash-hdr"><h2 class="page-title">Pay Your Dues</h2><p class="tmut tsm">Complete your payment securely.</p></div>
+      <div class="amount-box" id="payAmountBox"><div class="lbl" id="payPeriodLabel">AMOUNT DUE &mdash; MARCH 2025</div><div class="amt" id="payAmountLabel">&#8369; 1,500.00</div><div class="lbl" style="margin-top:4px" id="payDueDateLabel">Due Date: March 31, 2025</div></div>
+      <div class="card mb3">
+        <div class="card-hdr"><h3>Select Payment Method</h3></div>
+        <div class="card-body">
+          <div class="pay-methods">
+            <div class="pay-opt sel" onclick="selectMethod(this)"><div class="pay-icon">&#128153;</div><div class="pay-name">GCash</div><div class="pay-sub">Via GCash App</div></div>
+            <div class="pay-opt" onclick="selectMethod(this)"><div class="pay-icon">&#128156;</div><div class="pay-name">PayMaya</div><div class="pay-sub">Via Maya App</div></div>
+            <div class="pay-opt" onclick="selectMethod(this)"><div class="pay-icon">&#127974;</div><div class="pay-name">Bank Transfer</div><div class="pay-sub">BDO / BPI / UnionBank</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb3">
+        <div class="card-hdr"><h3>&#128153; Payment Details</h3></div>
+        <div class="card-body">
+          <div class="alert a-info"><i class="fas fa-info-circle"></i> Send to GCash <strong>0917-XXX-XXXX</strong> (San Alfonso Homes HOA), then fill in the details below.</div>
+          <div class="fg"><label class="fl">Your GCash Number</label><input type="text" class="fc" id="gcashNum" placeholder="09XX-XXX-XXXX"/></div>
+          <div class="fg"><label class="fl">GCash Reference Number</label><input type="text" class="fc" id="gcashRef" placeholder="e.g. 1234567890"/></div>
+          <div class="fg"><label class="fl">Amount Sent</label><input type="text" class="fc" id="payAmountInput" readonly/></div>
+          <div class="fg"><label class="fl">Upload Screenshot (Optional)</label><input type="file" class="fc" accept="image/*"/></div>
+          <button id="payBtn" class="btn btn-gold btn-lg btn-block" onclick="processPayment()"><i class="fas fa-lock"></i> Confirm Payment</button>
+        </div>
+      </div>
+      <div style="text-align:center"><button class="btn btn-ghost" onclick="goToDashboard()"><i class="fas fa-arrow-left"></i> Back to Dashboard</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ PAGE: RECEIPT -->
+<div id="page-receipt" class="page">
+  <div class="section">
+    <div class="container">
+      <div class="receipt-wrap">
+        <div class="alert a-ok" style="margin-bottom:1.5rem"><i class="fas fa-check-circle"></i> <strong>Payment Successful!</strong> Your official receipt has been generated.</div>
+        <div class="receipt">
+          <div class="receipt-hdr">
+            <div class="receipt-logo"><i class="fas fa-home"></i></div>
+            <h2>San Alfonso Homes HOA</h2><p>Official Payment Receipt</p>
+            <div class="receipt-num" id="rcpNum">Receipt No. #RCP-2503</div>
+          </div>
+          <div class="receipt-body">
+            <div class="receipt-stamp">&#10003; PAYMENT CONFIRMED</div><br>
+            <div class="receipt-row"><span class="k">Resident Name</span><span class="v" id="rcpName">Juan Dela Cruz</span></div>
+            <div class="receipt-row"><span class="k">Unit / Block</span><span class="v" id="rcpUnit">Block 3, Unit 12</span></div>
+            <div class="receipt-row"><span class="k">Billing Period</span><span class="v" id="rcpPeriod">March 2025</span></div>
+            <div class="receipt-row"><span class="k">Description</span><span class="v">Monthly HOA Dues</span></div>
+            <div class="receipt-row"><span class="k">Payment Method</span><span class="v" id="rcpMethod">GCash</span></div>
+            <div class="receipt-row"><span class="k">Reference No.</span><span class="v" id="rcpRef">GC-9812345678</span></div>
+            <div class="receipt-row"><span class="k">Date &amp; Time Paid</span><span class="v" id="rcpDate">March 20, 2025 &mdash; 10:42 AM</span></div>
+            <div class="receipt-row"><span class="k">Processed By</span><span class="v">Online Portal</span></div>
+            <div class="receipt-total"><div><div class="lbl">TOTAL AMOUNT PAID</div></div><div class="amt" id="rcpAmount">&#8369; 1,500.00</div></div>
+          </div>
+        </div>
+        <div class="receipt-actions">
+          <button class="btn btn-green btn-lg" style="flex:1" onclick="window.print()"><i class="fas fa-print"></i> Print Receipt</button>
+          <button class="btn btn-gold btn-lg" style="flex:1" onclick="showToast('Receipt downloaded!')"><i class="fas fa-download"></i> Download PDF</button>
+        </div>
+        <div style="text-align:center;margin-top:1rem"><button class="btn btn-ghost" onclick="goToDashboard()"><i class="fas fa-arrow-left"></i> Back to Dashboard</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ PAGE: BILLING (redirect to dashboard) -->
+<div id="page-billing" class="page">
+  <div class="section"><div class="container" style="text-align:center;padding:4rem 2rem">
+    <div style="font-size:3rem;margin-bottom:1rem">&#128196;</div>
+    <h2 class="page-title" style="margin-bottom:.75rem">Please Log In</h2>
+    <p class="tmut">You need to log in to view your billing details.</p>
+    <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center">
+      <button class="btn btn-green btn-lg" onclick="openModal('loginModal')"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================================================ PAGE: ANNOUNCEMENTS -->
+<div id="page-announcements" class="page">
+  <div class="section">
+    <div class="container">
+      <div style="margin-bottom:2rem"><div class="section-tag">Community Board</div><h2 class="page-title" style="margin-top:.5rem">Announcements</h2><p class="tmut" style="margin-top:.5rem">Latest updates from San Alfonso Homes HOA.</p></div>
+      <div style="display:grid;gap:1.25rem">
+        <div class="card"><div class="card-body"><div class="ann-meta"><span class="ann-tag tag-notice" style="background:rgba(201,168,76,.15);color:var(--gold)">Notice</span><span class="tsm tmut">March 20, 2025</span></div><h3 style="color:var(--gd);margin-bottom:.5rem">March 2025 Dues Reminder</h3><p style="color:var(--g400);font-size:.9rem;line-height:1.7">Monthly dues of <strong>&#8369;1,500</strong> due on March 31, 2025. Late penalty of &#8369;150 applies after due date.</p></div></div>
+        <div class="card"><div class="card-body"><div class="ann-meta"><span class="ann-tag tag-maint" style="background:rgba(192,57,43,.12);color:var(--danger)">Maintenance</span><span class="tsm tmut">March 18, 2025</span></div><h3 style="color:var(--gd);margin-bottom:.5rem">Water Interruption &mdash; Block C</h3><p style="color:var(--g400);font-size:.9rem;line-height:1.7">Interruption on <strong>March 22, 6AM&ndash;12PM</strong> due to pipeline maintenance. Please store enough water.</p></div></div>
+        <div class="card"><div class="card-body"><div class="ann-meta"><span class="ann-tag tag-event" style="background:rgba(41,128,185,.12);color:var(--info)">Event</span><span class="tsm tmut">March 15, 2025</span></div><h3 style="color:var(--gd);margin-bottom:.5rem">General Assembly &mdash; April 5</h3><p style="color:var(--g400);font-size:.9rem;line-height:1.7">Q1 2025 General Assembly at the <strong>Clubhouse, April 5 at 3:00 PM</strong>. Budget review, security, community projects.</p></div></div>
+        <div class="card"><div class="card-body"><div class="ann-meta"><span class="ann-tag tag-notice" style="background:rgba(201,168,76,.15);color:var(--gold)">Notice</span><span class="tsm tmut">March 1, 2025</span></div><h3 style="color:var(--gd);margin-bottom:.5rem">Online Payment System Now Available</h3><p style="color:var(--g400);font-size:.9rem;line-height:1.7">Pay via <strong>GCash, PayMaya, or Bank Transfer</strong> through our portal. Login and go to Payments to get started.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ PAGE: CONTACT -->
+<div id="page-contact" class="page">
+  <div class="section"><div class="container">
+    <div style="margin-bottom:2.5rem"><div class="section-tag">Get In Touch</div><h2 class="page-title" style="margin-top:.5rem">Contact Us</h2><p class="tmut" style="margin-top:.5rem">Have concerns or questions? Reach out to the HOA office.</p></div>
+    <div class="cg">
+      <div class="card"><div class="card-body">
+        <div class="ci-row"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><strong>Address</strong><p>San Alfonso Homes, Brgy. Punta, Calamba, Laguna</p></div></div>
+        <div class="ci-row"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><strong>Phone</strong><p>(049) 555-0123 / 0917-555-4567</p></div></div>
+        <div class="ci-row"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><strong>Email</strong><p>hoa@sanalfonsohomes.ph</p></div></div>
+        <div class="ci-row"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><strong>Office Hours</strong><p>Monday &ndash; Friday, 8:00 AM &ndash; 5:00 PM</p></div></div>
+      </div></div>
+      <div class="card">
+        <div class="card-hdr"><h3>Send a Message</h3></div>
+        <div class="card-body">
+          <div class="g2"><div class="fg"><label class="fl">First Name</label><input class="fc" type="text" placeholder="Juan"/></div><div class="fg"><label class="fl">Last Name</label><input class="fc" type="text" placeholder="Dela Cruz"/></div></div>
+          <div class="fg"><label class="fl">Unit / Block</label><input class="fc" type="text" placeholder="Block 3, Unit 12"/></div>
+          <div class="fg"><label class="fl">Email</label><input class="fc" type="email" placeholder="juan@email.com"/></div>
+          <div class="fg"><label class="fl">Concern</label><select class="fc"><option>Billing Inquiry</option><option>Payment Issue</option><option>Receipt Request</option><option>General Concern</option><option>Other</option></select></div>
+          <div class="fg"><label class="fl">Message</label><textarea class="fc" rows="4" placeholder="Type your message here..."></textarea></div>
+          <button class="btn btn-green btn-lg btn-block" onclick="showToast('Message sent! HOA will respond within 1-2 business days.')"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================================================ PAGE: ADMIN DASHBOARD -->
+<div id="page-admin" class="page">
+  <div class="dash-layout">
+    <div class="sidebar">
+      <div class="sb-user">
+        <div class="sb-avatar" style="background:linear-gradient(135deg,#c0392b,#e74c3c)">A</div>
+        <div class="sb-name">Admin User</div>
+        <div class="sb-unit" style="color:rgba(255,255,255,.5)">System Administrator</div>
+      </div>
+      <nav class="sb-nav">
+        <a onclick="showAdminTab('overview')" id="at-overview" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a>
+        <a onclick="showAdminTab('residents')" id="at-residents"><i class="fas fa-users"></i> Residents</a>
+        <a onclick="showAdminTab('billing')" id="at-billing"><i class="fas fa-file-invoice-dollar"></i> Billing</a>
+        <a onclick="showAdminTab('payments')" id="at-payments"><i class="fas fa-credit-card"></i> Payments</a>
+        <a onclick="showAdminTab('reports')" id="at-reports"><i class="fas fa-chart-bar"></i> Reports</a>
+        <a onclick="showAdminTab('announce')" id="at-announce"><i class="fas fa-bullhorn"></i> Announcements</a>
+        <div class="sb-div"></div>
+        <a onclick="doLogout()" class="sb-dim"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </div>
+    <div class="dash-content">
+
+      <!-- ADMIN TAB: Overview -->
+      <div id="atc-overview" class="tab-c active">
+        <div class="dash-hdr"><h2>Admin Dashboard</h2><p>Financial overview for March 2025.</p></div>
+        <div class="sw-grid" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+          <div class="sw"><div class="sw-icon ic-g"><i class="fas fa-peso-sign"></i></div><div><div class="sw-val">&#8369;312K</div><div class="sw-lbl">Total Collected</div></div></div>
+          <div class="sw"><div class="sw-icon ic-r"><i class="fas fa-exclamation-circle"></i></div><div><div class="sw-val">&#8369;21K</div><div class="sw-lbl">Unpaid Dues</div></div></div>
+          <div class="sw"><div class="sw-icon ic-o"><i class="fas fa-users"></i></div><div><div class="sw-val" id="totalUnitsCount">4</div><div class="sw-lbl">Total Residents</div></div></div>
+          <div class="sw"><div class="sw-icon ic-b"><i class="fas fa-check-double"></i></div><div><div class="sw-val">234</div><div class="sw-lbl">Paid This Month</div></div></div>
+        </div>
+        <div class="ag2">
+          <div class="card"><div class="card-hdr"><h3><i class="fas fa-chart-bar tgold mr6"></i>Monthly Collections 2025</h3></div><div class="card-body"><div class="bar-chart" style="height:160px"><div class="bar-item"><div class="bar" style="height:100px"></div><div class="bar-val">352k</div><div class="bar-lbl">Jan</div></div><div class="bar-item"><div class="bar" style="height:95px"></div><div class="bar-val">340k</div><div class="bar-lbl">Feb</div></div><div class="bar-item"><div class="bar" style="height:88px"></div><div class="bar-val">312k</div><div class="bar-lbl">Mar</div></div></div></div></div>
+          <div class="card"><div class="card-hdr"><h3><i class="fas fa-chart-pie tgold mr6"></i>Payment Status</h3></div><div class="card-body" style="display:flex;flex-direction:column;gap:1rem">
+            <div><div class="prog-row"><span class="tsm bold">Paid</span><span class="tsm bold tg">234/248 (94%)</span></div><div class="prog-wrap"><div class="prog-bar" style="width:94%"></div></div></div>
+            <div><div class="prog-row"><span class="tsm bold">Unpaid</span><span class="tsm bold" style="color:var(--warn)">10/248 (4%)</span></div><div class="prog-wrap"><div class="prog-bar" style="width:4%;background:var(--warn)"></div></div></div>
+            <div><div class="prog-row"><span class="tsm bold">Overdue</span><span class="tsm bold tred">4/248 (2%)</span></div><div class="prog-wrap"><div class="prog-bar" style="width:2%;background:var(--danger)"></div></div></div>
+          </div></div>
+        </div>
+        <div class="card"><div class="card-hdr"><h3>Recent Payments</h3><button class="btn btn-ghost btn-sm" onclick="showAdminTab('payments')">View All</button></div><div class="t-wrap"><table><thead><tr><th>Resident</th><th>Unit</th><th>Period</th><th>Amount</th><th>Method</th><th>Date</th><th>Status</th></tr></thead><tbody id="adminRecentPayments"></tbody></table></div></div>
+      </div>
+
+      <!-- ADMIN TAB: Residents -->
+      <div id="atc-residents" class="tab-c">
+        <div class="page-top-row"><div><h2>Manage Residents</h2><p class="tmut tsm">Resident accounts and login credentials</p></div><button class="btn btn-green" onclick="openModal('addResModal')"><i class="fas fa-plus"></i> Add Resident</button></div>
+        <div class="card">
+          <div class="card-hdr"><h3>All Residents &amp; Accounts</h3><input type="text" class="fc" id="resSearch" oninput="searchResidents()" placeholder="&#128269; Search..." style="width:220px;padding:.4rem .75rem;font-size:.82rem"/></div>
+          <div class="t-wrap"><table><thead><tr><th>Name</th><th>Unit</th><th>Email</th><th>Phone</th><th>Username</th><th>Password</th><th>Status</th><th>Actions</th></tr></thead><tbody id="residentsTable">
+            <tr><td><strong>Juan Dela Cruz</strong></td><td>Block 3, Unit 12</td><td>juan@email.com</td><td>0917-XXX-1234</td><td><code>juan</code></td><td><code>juan123</code></td><td><span class="badge b-paid">Active</span></td><td><button class="btn btn-danger btn-sm" onclick="deleteResident(this)"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td><strong>Maria Santos</strong></td><td>Block 1, Unit 05</td><td>maria@email.com</td><td>0918-XXX-5678</td><td><code>maria</code></td><td><code>maria123</code></td><td><span class="badge b-paid">Active</span></td><td><button class="btn btn-danger btn-sm" onclick="deleteResident(this)"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td><strong>Pedro Reyes</strong></td><td>Block 2, Unit 08</td><td>pedro@email.com</td><td>0919-XXX-9012</td><td><code>pedro</code></td><td><code>pedro123</code></td><td><span class="badge b-paid">Active</span></td><td><button class="btn btn-danger btn-sm" onclick="deleteResident(this)"><i class="fas fa-trash"></i></button></td></tr>
+            <tr><td><strong>Ana Gonzales</strong></td><td>Block 4, Unit 02</td><td>ana@email.com</td><td>0920-XXX-3456</td><td><code>ana</code></td><td><code>ana123</code></td><td><span class="badge b-paid">Active</span></td><td><button class="btn btn-danger btn-sm" onclick="deleteResident(this)"><i class="fas fa-trash"></i></button></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ADMIN TAB: Billing -->
+      <div id="atc-billing" class="tab-c">
+        <div class="page-top-row"><div><h2>Billing Management</h2><p class="tmut tsm">Create and manage resident bills</p></div><button class="btn btn-green" onclick="openModal('billModal')"><i class="fas fa-plus"></i> Create Billing</button></div>
+        <div class="card"><div class="t-wrap"><table><thead><tr><th>Resident</th><th>Unit</th><th>Period</th><th>Description</th><th>Amount</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="adminBillingTable">
+          <tr><td>Juan Dela Cruz</td><td>B3-U12</td><td>March 2025</td><td>Monthly HOA Dues</td><td>&#8369;1,500</td><td>Mar 31, 2025</td><td><span class="badge b-unpaid">Unpaid</span></td><td><button class="btn btn-ghost btn-sm" onclick="openEditBilling(this)"><i class="fas fa-edit"></i> Edit</button></td></tr>
+          <tr><td>Ana Gonzales</td><td>B4-U02</td><td>March 2025</td><td>Monthly HOA Dues</td><td>&#8369;1,500</td><td>Mar 31, 2025</td><td><span class="badge b-pend">Pending</span></td><td><button class="btn btn-ghost btn-sm" onclick="openEditBilling(this)"><i class="fas fa-edit"></i> Edit</button></td></tr>
+          <tr><td>Maria Santos</td><td>B1-U05</td><td>March 2025</td><td>Monthly HOA Dues</td><td>&#8369;1,500</td><td>Mar 31, 2025</td><td><span class="badge b-paid">Paid</span></td><td><button class="btn btn-ghost btn-sm" onclick="showPage('receipt')"><i class="fas fa-eye"></i> View</button></td></tr>
+          <tr><td>Pedro Reyes</td><td>B2-U08</td><td>March 2025</td><td>Monthly HOA Dues</td><td>&#8369;1,500</td><td>Mar 31, 2025</td><td><span class="badge b-paid">Paid</span></td><td><button class="btn btn-ghost btn-sm" onclick="showPage('receipt')"><i class="fas fa-eye"></i> View</button></td></tr>
+        </tbody></table></div></div>
+      </div>
+
+      <!-- ADMIN TAB: Payments -->
+      <div id="atc-payments" class="tab-c">
+        <div class="dash-hdr"><h2>Payment Records</h2><p class="tmut tsm">All transactions &mdash; verify pending payments here</p></div>
+        <div class="card">
+          <div class="card-hdr"><h3>Transactions</h3><button class="btn btn-green btn-sm" onclick="showToast('CSV exported!')"><i class="fas fa-download"></i> Export CSV</button></div>
+          <div class="t-wrap"><table><thead><tr><th>Receipt #</th><th>Resident</th><th>Unit</th><th>Period</th><th>Amount</th><th>Method</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="paymentsTable">
+            <tr><td>#RCP-2503</td><td>Juan D.C.</td><td>B3-U12</td><td>Mar 2025</td><td>&#8369;1,500</td><td>GCash</td><td>Mar 20</td><td><span class="badge b-paid">Paid</span></td><td><button class="btn btn-ghost btn-sm" onclick="showPage('receipt')"><i class="fas fa-eye"></i> View</button></td></tr>
+            <tr><td>#RCP-2502</td><td>Maria S.</td><td>B1-U05</td><td>Mar 2025</td><td>&#8369;1,500</td><td>PayMaya</td><td>Mar 5</td><td><span class="badge b-paid">Paid</span></td><td><button class="btn btn-ghost btn-sm" onclick="showPage('receipt')"><i class="fas fa-eye"></i> View</button></td></tr>
+            <tr><td>#RCP-2501</td><td>Pedro R.</td><td>B2-U08</td><td>Mar 2025</td><td>&#8369;1,500</td><td>Bank</td><td>Mar 10</td><td><span class="badge b-paid">Paid</span></td><td><button class="btn btn-ghost btn-sm" onclick="showPage('receipt')"><i class="fas fa-eye"></i> View</button></td></tr>
+            <tr id="pendingRow1"><td>&mdash;</td><td>Ana G.</td><td>B4-U02</td><td>Mar 2025</td><td>&#8369;1,500</td><td>GCash</td><td>Pending</td><td><span class="badge b-pend">Pending</span></td><td><button class="btn btn-info btn-sm" onclick="verifyPayment(this,'pendingRow1','Ana Gonzales','Mar 2025')"><i class="fas fa-check-circle"></i> Verify</button></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <!-- ADMIN TAB: Reports -->
+      <div id="atc-reports" class="tab-c">
+        <div class="dash-hdr"><h2>Financial Reports</h2><p class="tmut tsm">Monthly and annual income reports</p></div>
+        <div class="ag3">
+          <div class="sw"><div class="sw-icon ic-g"><i class="fas fa-peso-sign"></i></div><div><div class="sw-val">&#8369;1.2M</div><div class="sw-lbl">Annual</div></div></div>
+          <div class="sw"><div class="sw-icon ic-o"><i class="fas fa-calendar"></i></div><div><div class="sw-val">&#8369;312K</div><div class="sw-lbl">March 2025</div></div></div>
+          <div class="sw"><div class="sw-icon ic-b"><i class="fas fa-percentage"></i></div><div><div class="sw-val">94%</div><div class="sw-lbl">Collection Rate</div></div></div>
+        </div>
+        <div class="card"><div class="card-hdr"><h3>Monthly Report &mdash; 2025</h3><button class="btn btn-green btn-sm" onclick="showToast('PDF downloaded!')"><i class="fas fa-download"></i> Download PDF</button></div>
+        <div class="t-wrap"><table><thead><tr><th>Month</th><th>Units Paid</th><th>Amount Collected</th><th>Unpaid</th><th>Rate</th></tr></thead><tbody>
+          <tr><td><strong>January 2025</strong></td><td>245</td><td>&#8369;367,500</td><td>3</td><td><span class="badge b-paid">98.8%</span></td></tr>
+          <tr><td><strong>February 2025</strong></td><td>241</td><td>&#8369;361,500</td><td>7</td><td><span class="badge b-paid">97.2%</span></td></tr>
+          <tr><td><strong>March 2025</strong></td><td>234</td><td>&#8369;312,000</td><td>14</td><td><span class="badge b-unpaid">94.4%</span></td></tr>
+        </tbody></table></div></div>
+      </div>
+
+      <!-- ADMIN TAB: Announcements -->
+      <div id="atc-announce" class="tab-c">
+        <div class="dash-hdr"><h2>Announcements</h2><p class="tmut tsm">Post updates to all residents</p></div>
+        <div class="card mb3"><div class="card-hdr"><h3>Post New Announcement</h3></div><div class="card-body">
+          <div class="fg"><label class="fl">Title</label><input class="fc" id="annTitle" type="text" placeholder="Announcement title..."/></div>
+          <div class="g2">
+            <div class="fg"><label class="fl">Category</label><select class="fc" id="annCat"><option>Notice</option><option>Maintenance</option><option>Event</option><option>Emergency</option></select></div>
+            <div class="fg"><label class="fl">Priority</label><select class="fc"><option>Normal</option><option>High</option><option>Urgent</option></select></div>
+          </div>
+          <div class="fg"><label class="fl">Message</label><textarea class="fc" id="annMsg" rows="4" placeholder="Write your announcement here..."></textarea></div>
+          <button class="btn btn-green" onclick="publishAnnouncement()"><i class="fas fa-paper-plane"></i> Publish Announcement</button>
+        </div></div>
+        <div class="card"><div class="card-hdr"><h3>Published Announcements</h3></div><div class="card-body" id="annList">
+          <div class="notif"><div class="ndot w"></div><div style="flex:1"><div class="n-text bold">March 2025 Dues Reminder</div><div class="n-time">March 20, 2025 &bull; Notice</div></div><button class="btn btn-danger btn-sm" onclick="deleteAnn(this)"><i class="fas fa-trash"></i></button></div>
+          <div class="notif"><div class="ndot i"></div><div style="flex:1"><div class="n-text bold">Water Interruption &mdash; Block C</div><div class="n-time">March 18, 2025 &bull; Maintenance</div></div><button class="btn btn-danger btn-sm" onclick="deleteAnn(this)"><i class="fas fa-trash"></i></button></div>
+          <div class="notif"><div class="ndot s"></div><div style="flex:1"><div class="n-text bold">General Assembly &mdash; April 5</div><div class="n-time">March 15, 2025 &bull; Event</div></div><button class="btn btn-danger btn-sm" onclick="deleteAnn(this)"><i class="fas fa-trash"></i></button></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ MODALS -->
+
+<!-- Resident Login -->
+<div class="overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-hdr"><h3><i class="fas fa-sign-in-alt" style="color:var(--gm);margin-right:8px"></i>Resident Login</h3><button class="modal-x" onclick="closeModal('loginModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div style="background:var(--g100);border-radius:10px;padding:.85rem 1rem;margin-bottom:1.25rem;font-size:.8rem;color:var(--g700)">
+        <strong style="display:block;margin-bottom:.4rem;color:var(--gd)">&#128274; Demo Accounts:</strong>
+        <span style="margin-right:.75rem">juan / juan123</span><span style="margin-right:.75rem">maria / maria123</span><span style="margin-right:.75rem">pedro / pedro123</span><span>ana / ana123</span>
+      </div>
+      <div class="fg"><label class="fl">Username</label><input class="fc" type="text" id="loginUser" placeholder="Enter your username"/></div>
+      <div class="fg"><label class="fl">Password</label><input class="fc" type="password" id="loginPass" placeholder="Enter your password"/></div>
+      <div id="loginError" class="alert a-err" style="display:none"><i class="fas fa-exclamation-triangle"></i><span id="loginErrMsg">Invalid username or password.</span></div>
+      <button class="btn btn-green btn-lg btn-block" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+      <p class="tsm tmut" style="text-align:center;margin-top:1rem">No account yet? Ask the HOA Admin to create one for you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Login -->
+<div class="overlay" id="adminModal">
+  <div class="modal">
+    <div class="modal-hdr"><h3><i class="fas fa-user-shield" style="color:var(--gm);margin-right:8px"></i>Admin Login</h3><button class="modal-x" onclick="closeModal('adminModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="alert a-info"><i class="fas fa-info-circle"></i> Demo credentials: <strong>admin / admin123</strong></div>
+      <div class="fg"><label class="fl">Username</label><input class="fc" type="text" id="adminUser" placeholder="admin"/></div>
+      <div class="fg"><label class="fl">Password</label><input class="fc" type="password" id="adminPass" placeholder="password"/></div>
+      <div id="adminError" class="alert a-err" style="display:none"><i class="fas fa-exclamation-triangle"></i><span id="adminErrMsg">Invalid credentials.</span></div>
+      <button class="btn btn-green btn-lg btn-block" onclick="doAdminLogin()"><i class="fas fa-shield-alt"></i> Admin Login</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create Billing -->
+<div class="overlay" id="billModal">
+  <div class="modal">
+    <div class="modal-hdr"><h3><i class="fas fa-file-invoice-dollar" style="color:var(--gm);margin-right:8px"></i>Create New Billing</h3><button class="modal-x" onclick="closeModal('billModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="fg"><label class="fl">Resident</label><select class="fc" id="bResident"><option value="">-- Select Resident --</option></select></div>
+      <div class="fg"><label class="fl">Billing Period</label><input class="fc" type="month" id="bPeriod"/></div>
+      <div class="fg"><label class="fl">Description</label><input class="fc" type="text" id="bDesc" value="Monthly HOA Dues"/></div>
+      <div class="g2">
+        <div class="fg"><label class="fl">Amount (&#8369;)</label><input class="fc" type="number" id="bAmount" value="1500" min="0"/></div>
+        <div class="fg"><label class="fl">Status</label><select class="fc" id="bStatus"><option value="unpaid">Unpaid</option><option value="paid">Paid</option><option value="pending">Pending</option></select></div>
+      </div>
+      <div class="fg"><label class="fl">Due Date</label><input class="fc" type="date" id="bDueDate"/></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('billModal')">Cancel</button><button class="btn btn-green" onclick="saveBilling()"><i class="fas fa-check"></i> Create Billing</button></div>
+  </div>
+</div>
+
+<!-- Edit Billing -->
+<div class="overlay" id="editBillModal">
+  <div class="modal">
+    <div class="modal-hdr"><h3><i class="fas fa-edit" style="color:var(--gm);margin-right:8px"></i>Edit Billing Record</h3><button class="modal-x" onclick="closeModal('editBillModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="alert a-info"><i class="fas fa-info-circle"></i> Resident and unit cannot be changed.</div>
+      <div class="g2">
+        <div class="fg"><label class="fl">Resident</label><input class="fc" type="text" id="eBResident" readonly style="background:var(--g100);cursor:not-allowed"/></div>
+        <div class="fg"><label class="fl">Unit</label><input class="fc" type="text" id="eBUnit" readonly style="background:var(--g100);cursor:not-allowed"/></div>
+      </div>
+      <div class="fg"><label class="fl">Billing Period</label><input class="fc" type="text" id="eBPeriod" placeholder="e.g. March 2025"/></div>
+      <div class="fg"><label class="fl">Description</label><input class="fc" type="text" id="eBDesc" placeholder="Monthly HOA Dues"/></div>
+      <div class="g2">
+        <div class="fg"><label class="fl">Amount (&#8369;)</label><input class="fc" type="number" id="eBAmount" min="0"/></div>
+        <div class="fg"><label class="fl">Status</label><select class="fc" id="eBStatus"><option value="unpaid">Unpaid</option><option value="pending">Pending</option><option value="paid">Paid</option><option value="overdue">Overdue</option></select></div>
+      </div>
+      <div class="fg"><label class="fl">Due Date</label><input class="fc" type="text" id="eBDueDate" placeholder="e.g. Mar 31, 2025"/></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-danger btn-sm" onclick="deleteEditRow()" style="margin-right:auto"><i class="fas fa-trash"></i> Delete</button>
+      <button class="btn btn-ghost" onclick="closeModal('editBillModal')">Cancel</button>
+      <button class="btn btn-green" onclick="saveEditBilling()"><i class="fas fa-save"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Resident -->
+<div class="overlay" id="addResModal">
+  <div class="modal">
+    <div class="modal-hdr"><h3><i class="fas fa-user-plus" style="color:var(--gm);margin-right:8px"></i>Add New Resident</h3><button class="modal-x" onclick="closeModal('addResModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <p class="fl" style="color:var(--gm);font-size:.7rem;letter-spacing:1px;margin-bottom:.75rem">PERSONAL INFORMATION</p>
+      <div class="g2"><div class="fg"><label class="fl">First Name</label><input class="fc" id="rFirst" type="text" placeholder="Juan"/></div><div class="fg"><label class="fl">Last Name</label><input class="fc" id="rLast" type="text" placeholder="Dela Cruz"/></div></div>
+      <div class="fg"><label class="fl">Email</label><input class="fc" id="rEmail" type="email" placeholder="juan@email.com"/></div>
+      <div class="fg"><label class="fl">Phone</label><input class="fc" id="rPhone" type="text" placeholder="09XX-XXX-XXXX"/></div>
+      <div class="g2"><div class="fg"><label class="fl">Block</label><input class="fc" id="rBlock" type="text" placeholder="Block 1"/></div><div class="fg"><label class="fl">Unit</label><input class="fc" id="rUnit" type="text" placeholder="Unit 01"/></div></div>
+      <div class="sep"></div>
+      <p class="fl" style="color:var(--gm);font-size:.7rem;letter-spacing:1px;margin-bottom:.75rem">LOGIN CREDENTIALS</p>
+      <div class="alert a-info" style="margin-bottom:1rem"><i class="fas fa-info-circle"></i> The resident uses these credentials to log in to their portal.</div>
+      <div class="fg"><label class="fl">Username</label><input class="fc" id="rUsername" type="text" placeholder="e.g. juan or juan@email.com"/></div>
+      <div class="g2">
+        <div class="fg"><label class="fl">Password</label><input class="fc" id="rPassword" type="password" placeholder="Min. 6 characters"/></div>
+        <div class="fg"><label class="fl">Confirm Password</label><input class="fc" id="rPassword2" type="password" placeholder="Repeat password"/></div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('addResModal')">Cancel</button><button class="btn btn-green" onclick="saveResident()"><i class="fas fa-plus"></i> Add Resident</button></div>
+  </div>
+</div>
+
+<!-- Verify Payment -->
+<div class="overlay" id="verifyModal">
+  <div class="modal">
+    <div class="modal-hdr"><h3><i class="fas fa-check-circle" style="color:var(--success);margin-right:8px"></i>Verify Payment</h3><button class="modal-x" onclick="closeModal('verifyModal')">&#10005;</button></div>
+    <div class="modal-body">
+      <div class="alert a-info"><i class="fas fa-info-circle"></i> Confirm payment details. This will mark it as <strong>Paid</strong>.</div>
+      <div style="background:var(--g100);border-radius:10px;padding:1rem;margin-bottom:1.25rem">
+        <div class="receipt-row"><span class="k">Resident</span><span class="v" id="vResident"></span></div>
+        <div class="receipt-row"><span class="k">Period</span><span class="v" id="vPeriod"></span></div>
+        <div class="receipt-row"><span class="k">Amount</span><span class="v">&#8369;1,500.00</span></div>
+      </div>
+      <div class="fg"><label class="fl">Reference Number</label><input class="fc" id="vRef" type="text" placeholder="GCash / bank reference number"/></div>
+      <div class="fg"><label class="fl">Date Received</label><input class="fc" id="vDate" type="date"/></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('verifyModal')">Cancel</button><button class="btn btn-green" id="confirmVerifyBtn" onclick="confirmVerify()"><i class="fas fa-check-circle"></i> Confirm &amp; Mark as Paid</button></div>
+  </div>
+</div>
+
+
+<!-- Main JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
